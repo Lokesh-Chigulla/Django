@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form Login page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto&family=Sofia+Sans+Semi+Condensed:wght@700&display=swap" rel="stylesheet">
+</head>
+<style>
+    .Body{
+        height: 400px;
+        width: 400px;
+        background-color: white;
+        margin-top: 100px;
+        margin-left: 500px;
+        border-radius: 80px;
+    }
+    .login {
+        font-size: 60px;
+        font-family: Sofia Sans Semi Condensed, Arial;
+        text-align: center;
+        margin-bottom: 80px;
+        padding: 10px;
+    }
+    .user {
+        font-size: 25px;
+        margin-left: 20px;
+        font-family: Roboto, Arial;
+        
+    }
+    .password {
+        font-size: 25px;
+        margin-left: 20px;
+        font-family: Roboto, Arial; 
+    }
+    .enter-1, .enter-2 {
+        margin-bottom: 20px;
+        margin-left: 10px;
+        width: 360px;
+        height: 30px;
+        border-radius: 15px;
+        border: 0.5px solid;
+        font-size: 16px;
+    }
+    body{
+        background-color: rgb(252, 245, 202);
+    }
+    .login-button {
+        height: 40px;
+        width: 80px;
+        margin-left: 160px;
+        padding: 5px;
+        background-color: whitesmoke;
+        border-radius: 20px;
+        border: 2px solid;
+        font-family: Roboto, Arial;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .message{
+        font-family: Roboto, Arial;
+        font-size: 25px;
+        font-weight: 600;
+        color: red;
+    }
+
+</style>
+<body>
+    <div class="Body">
+        <p class="login">Login</p>
+        <form method="post">
+            {% csrf_token %}
+            
+            <label class="user">UserName</label><br>
+            <input class="enter-1" type = "text" name="username"><br>
+            <label class="password">Password</label><br>
+            <input class="enter-2" type = "password" name="password1"><br>
+            <input class="login-button" type="submit" value="login">  
+        </form>
+    </div>
+    <div>
+        {% for message in messages %}
+        <p class="message">{{message}}</p>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>
