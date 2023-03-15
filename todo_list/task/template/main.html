@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <style>
+        body{
+            background-color: rgba(82, 120, 247, 0.973);
+        }
+        .main{
+            height: 1000px;
+            width: 500px;
+            background-color: white;
+            margin-left: 450px;
+            margin-top: 30px;
+            border: 0px solid;
+            border-color: rgb(0, 0, 0);
+            border-radius: 5px;
+            box-shadow: 5px 10px 2pc black;
+        }
+        .Input{
+            margin: 10px;
+            margin-top: 20px;
+            width: 465px;
+            height: 60px;
+            font-size: 20px;
+            font-family: Roboto, Arial;
+            border-color: rgb(143, 143, 132);
+            border-radius: 5px;
+            border-width: 2px;
+            padding-left: 10px;
+        }
+        .button-submit {
+            height: 40px;
+            width: 400px;
+            margin-left: 40px;
+            padding: 5px;
+            background-color: rgb(25, 65, 241);
+            color: white;
+            border-radius: 20px;
+            border: 2px solid;
+            font-family: Roboto, Arial;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .geeks {
+            text-align: center;
+            margin: 40px auto 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+  
+        .geeks span {
+            font-size: 80px;
+            font-weight: 700;
+            color: green;
+            position: relative;
+            text-shadow: -1px 0 0 rgba(0, 0, 0, .2);
+        }
+  
+        .geeks span::before {
+            content: attr(data-title);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: left;
+            color: #2b2a2a;
+            transition: .5s cubic-bezier(
+                0.175, 0.885, 0.32, 1.275);
+            transform: rotateY(25deg);
+        }
+  
+        .geeks span:hover::before {
+            transform: perspective(1000px) rotate(-67deg);
+        }
+        .task {
+            background-color: rgb(226, 43, 226);
+            width: 460px;
+            height: 80px;
+            margin-left: 20px;
+            border-radius: 12px;
+            
+        }
+        .task-list{
+            padding: 10px;
+            padding-bottom: 0px;
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        .update{
+            padding-left: 16px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: antiquewhite; 
+        }
+        .update-button{
+            background-color: rgb(25, 116, 29);
+            display: inline-block;
+            height: 25px;
+            width: 80px;
+            margin-left: 20px;
+            margin-bottom: -10px;
+            border-radius: 10px;
+        }
+        .delete {
+            padding-left: 18px;
+            margin-top: 10px;
+            text-decoration: none;
+            color: antiquewhite; 
+        }
+        .delete-button{
+            background-color: rgb(230, 9, 9);
+            display: inline-block;
+            height: 25px;
+            width: 80px;
+            margin-left: 20px;
+            margin-bottom: -10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="geeks">
+            <span data-title="T">T</span>
+            <span data-title="O">O</span>
+            <span data-title=" "> </span>
+            <span data-title="D">D</span>
+            <span data-title="O">O</span>
+            <span data-title=" "> </span>
+            <span data-title="L">L</span>
+            <span data-title="I">I</span>
+            <span data-title="S">S</span>
+            <span data-title="T">T</span>
+            
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <input class="Input" type="text", name="title" placeholder="Add your Task">
+            <!--<input type="checkbox" id="task", name =complete>-->
+            <div >
+                <input class="button-submit" type="submit", name="submit">
+            </div>    
+        </form>
+
+        {% for task in tasks %}
+           <div class="task">
+             <p class="task-list">{{task}}</p>
+             <div class="update-button">
+                <a class="update" href="{% url 'update' task.id %}">Update</a>
+             </div>
+             <div class="delete-button">
+                <a class="delete" href="{% url 'delete' task.id %}">Delete</a>    
+             </div>
+             
+           </div>
+        {% endfor %}
+
+
+    </div>
+</body>
+</html>
